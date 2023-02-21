@@ -94,7 +94,6 @@ def main():
     with open("votes.csv", "r", encoding="utf-8-sig") as f:
         reader = csv.DictReader(f)
         votes = list(reader)
-        print(votes)
     seed = get_seed(votes)
     votes = convert_votes(votes)
     calculate_irv_winner(votes)
