@@ -58,7 +58,6 @@ def get_losers(votes_per_candidate: dict[str, int]) -> list[str]:
 
 
 def irv_step(votes: list[list]) -> list[list]:
-    # TODO: Decide whether new seed for each step
     candidates = get_candidates(votes)
     votes_per_candidate = get_votes_per_candidate(candidates, votes)
     potential_losers = get_losers(votes_per_candidate)
