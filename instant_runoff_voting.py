@@ -95,6 +95,7 @@ def main():
         reader = csv.DictReader(f)
         votes = list(reader)
     seed = get_seed(votes)
+    random.seed(seed)
     votes = convert_votes(votes)
     calculate_irv_winner(votes)
 
