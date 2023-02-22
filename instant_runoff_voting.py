@@ -63,7 +63,6 @@ def irv_step(votes: list[list]) -> list[list]:
     potential_losers = get_losers(votes_per_candidate)
 
     print('Votes per candidate', votes_per_candidate)
-    print('Potential losers', potential_losers)
     # Check deeper if zeroth order leads to tie
     depth = 1
     while len(potential_losers) > 1 and depth <= len(votes[0]) - 1:
