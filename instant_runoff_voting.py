@@ -30,7 +30,7 @@ def get_candidates(votes: list[list]) -> list:
             candidate = vote[i]
             if candidate:
                 candidates.add(candidate)
-    return list(candidates)
+    return list(sorted(candidates))
 
 
 def remove_loser(votes: list[list], loser: str) -> list[list]:
