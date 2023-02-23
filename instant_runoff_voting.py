@@ -81,7 +81,7 @@ def irv_step(votes: list[list]) -> list[list]:
     return votes
 
 
-def calculate_irv_winner(votes):
+def calculate_irv_winner(votes: list[list]):
     candidates = get_candidates(votes)
     while len(candidates) > 1:
         votes = irv_step(votes)
