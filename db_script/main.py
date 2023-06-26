@@ -54,19 +54,19 @@ if __name__ == '__main__':
     participants = limesurvey.add_participants(int(survey_id), user_arr)
     participant_list = []
     for p in participants:
-        if valid_till != '':
+        if valid_till == '' or valid_till is None:
+            participant_list.append((int(p['lastname']),
+                                     survey_name,
+                                     p['token'],
+                                     f"https://survey.vatsim-germany.org/index.php?r=survey/index&token={p['token']}&sid={int(survey_id)}&lang=de-informal"
+                                    ))
+        else:
             participant_list.append((int(p['lastname']),
                                      survey_name,
                                      p['token'],
                                      f"https://survey.vatsim-germany.org/index.php?r=survey/index&token={p['token']}&sid={int(survey_id)}&lang=de-informal",
                                      valid_till if (valid_till != '') else "NULL")
                                     )
-        else:
-            participant_list.append((int(p['lastname']),
-                                     survey_name,
-                                     p['token'],
-                                     f"https://survey.vatsim-germany.org/index.php?r=survey/index&token={p['token']}&sid={int(survey_id)}&lang=de-informal"
-                                    ))
 
     prompt = input("Do you want to review the user list one last time? [n/q(uit)/p(rint)")
     while True:
@@ -82,10 +82,10 @@ if __name__ == '__main__':
 
     print("Adding survey Keys...")
 
-    if valid_till != '':
-        vdb.add_survey_keys_with_date(participant_list)
-    else:
+    if valid_till == '' or valid_till is None:
         vdb.add_survey_keys_without_date(participant_list)
+    else:
+        vdb.add_survey_keys_with_date(participant_list)
     print(f"Done. {len(participant_list)} keys added. Do you want to activate the survey now?")
     activate_prompt = input("[y/n] ")
 
