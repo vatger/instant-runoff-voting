@@ -18,9 +18,15 @@ class VatgerDB:
         )
         return res
 
-    def add_survey_keys(self, s_keys):
+    def add_survey_keys_with_date(self, s_keys):
         self.sql_conn.execute(
-            f"INSERT INTO survey_keys (account_id, name, token, url, valid_till, created_at) VALUES {str(s_keys).strip('[]')}",
+            f"INSERT INTO survey_keys (account_id, name, token, url, valid_till) VALUES {str(s_keys).strip('[]')}",
+            "hp"
+        )
+
+    def add_survey_keys_without_date(self, s_keys):
+        self.sql_conn.execute(
+            f"INSERT INTO survey_keys (account_id, name, token, url) VALUES {str(s_keys).strip('[]')}",
             "hp"
         )
 
