@@ -39,6 +39,7 @@ class SqlConnector:
 
         cursor = self.conn.cursor()
         cursor.execute(command)
+        self.conn.commit()
 
     def __connect(self, conn_dest: str):
         if self.conn is not None:
