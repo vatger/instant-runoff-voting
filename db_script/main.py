@@ -59,7 +59,7 @@ if __name__ == '__main__':
                                      survey_name,
                                      p['token'],
                                      f"https://survey.vatsim-germany.org/index.php?r=survey/index&token={p['token']}&sid={int(survey_id)}&lang=de-informal"
-                                    ))
+                                     ))
         else:
             participant_list.append((int(p['lastname']),
                                      survey_name,

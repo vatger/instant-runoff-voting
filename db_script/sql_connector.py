@@ -35,6 +35,8 @@ class SqlConnector:
         if self.current_db != db_target:
             self.__connect(db_target)
 
+        print("Executing " + command)
+
         cursor = self.conn.cursor()
         cursor.execute(command)
 
