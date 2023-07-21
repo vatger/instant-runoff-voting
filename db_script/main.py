@@ -27,6 +27,9 @@ if __name__ == '__main__':
     user_arr = []
     r = vdb.get_members_from_forum_group(int(forum_group))
     for res in r:
+        # Remove Forum Accounts that don't have a CID (utility / department accounts)
+        if res[1] is None or res[1] == '':
+            continue
         user_arr.append(map_db_user_to_obj(res))
 
     print("\n\n================= Review Selection =================\n"
@@ -51,9 +54,13 @@ if __name__ == '__main__':
 
         prompt = input('[y/n/p(rint)] ')
 
+    # Adds a list of participants to the specified survey
     participants = limesurvey.add_participants(int(survey_id), user_arr)
     participant_list = []
+
+    # Add the received data to a list which will be inserted into the database
     for p in participants:
+        # The tuples are defined differently depending on the existence of the valid_till parameter
         if valid_till == '' or valid_till is None:
             participant_list.append((int(p['lastname']),
                                      survey_name,
