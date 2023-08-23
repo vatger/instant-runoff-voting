@@ -19,16 +19,18 @@ class VatgerDB:
         return res
 
     def add_survey_keys_with_date(self, s_keys):
-        self.sql_conn.execute(
-            f"INSERT INTO survey_keys (account_id, name, token, url, valid_till) VALUES {str(s_keys).strip('[]')}",
-            "hp"
-        )
+        for participant in s_keys:
+            self.sql_conn.execute(
+                f"INSERT INTO survey_keys (account_id, name, token, url, valid_till) VALUES {str(s_keys).strip('[]')}",
+                "hp"
+            )
 
     def add_survey_keys_without_date(self, s_keys):
-        self.sql_conn.execute(
-            f"INSERT INTO survey_keys (account_id, name, token, url) VALUES {str(s_keys).strip('[]')}",
-            "hp"
-        )
+        for participant in s_keys:
+            self.sql_conn.execute(
+                f"INSERT INTO survey_keys (account_id, name, token, url) VALUES {participant}",
+                "hp"
+            )
 
     def get_members_from_forum_group(self, forum_group_id: int):
         res = self.sql_conn.execute_select(
