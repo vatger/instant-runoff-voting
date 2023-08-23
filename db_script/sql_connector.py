@@ -45,7 +45,7 @@ class SqlConnector:
         if self.conn is not None:
             self.conn.close()
 
-        if conn_dest == 'hp':
+        if conn_dest == 'homepage':
             self.conn = mysql.connector.connect(
                 host=self.host,
                 user=self.username_hp,
