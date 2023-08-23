@@ -1,4 +1,5 @@
 from sql_connector import SqlConnector
+from alive_progress import alive_bar
 
 
 class VatgerDB:
@@ -19,18 +20,22 @@ class VatgerDB:
         return res
 
     def add_survey_keys_with_date(self, s_keys):
-        for participant in s_keys:
-            self.sql_conn.execute(
-                f"INSERT INTO survey_keys (account_id, name, token, url, valid_till) VALUES {str(s_keys).strip('[]')}",
-                "hp"
-            )
+        with alive_bar(len(s_keys)) as bar:
+            for participant in s_keys:
+                self.sql_conn.execute(
+                    f"INSERT INTO survey_keys (account_id, name, token, url, valid_till) VALUES {participant}",
+                    "hp"
+                )
+                bar()
 
     def add_survey_keys_without_date(self, s_keys):
-        for participant in s_keys:
-            self.sql_conn.execute(
-                f"INSERT INTO survey_keys (account_id, name, token, url) VALUES {participant}",
-                "hp"
-            )
+        with alive_bar(len(s_keys)) as bar:
+            for participant in s_keys:
+                self.sql_conn.execute(
+                    f"INSERT INTO survey_keys (account_id, name, token, url) VALUES {participant}",
+                    "hp"
+                )
+                bar()
 
     def get_members_from_forum_group(self, forum_group_id: int):
         res = self.sql_conn.execute_select(
