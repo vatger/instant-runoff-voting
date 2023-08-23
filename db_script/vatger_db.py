@@ -1,5 +1,6 @@
 from sql_connector import SqlConnector
 from alive_progress import alive_bar
+import os
 
 
 class VatgerDB:
@@ -9,13 +10,13 @@ class VatgerDB:
     def truncate_survey_keys(self):
         self.sql_conn.execute(
             "TRUNCATE TABLE survey_keys",
-            "hp"
+            "homepage"
         )
 
     def get_survey_keys(self):
         res = self.sql_conn.execute_select(
             "SELECT * FROM survey_keys",
-            "hp"
+            "homepage"
         )
         return res
 
@@ -24,7 +25,7 @@ class VatgerDB:
             for participant in s_keys:
                 self.sql_conn.execute(
                     f"INSERT INTO survey_keys (account_id, name, token, url, valid_till) VALUES {participant}",
-                    "hp"
+                    "homepage"
                 )
                 bar()
 
@@ -33,7 +34,7 @@ class VatgerDB:
             for participant in s_keys:
                 self.sql_conn.execute(
                     f"INSERT INTO survey_keys (account_id, name, token, url) VALUES {participant}",
-                    "hp"
+                    "homepage"
                 )
                 bar()
 
